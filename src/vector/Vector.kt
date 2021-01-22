@@ -9,7 +9,7 @@ class Vector(private val capacity: Int) {
 
     @Throws(FullVectorException::class)
     fun addOrThrows(element: String) {
-        if (this.size < this.elements.size){
+        if (this.size < this.capacity){
             this.elements[this.size] = element
             this.size++;
         } else {
@@ -18,7 +18,7 @@ class Vector(private val capacity: Int) {
     }
 
     fun add(element: String): Boolean {
-        return if (this.size < this.elements.size){
+        return if (this.size < this.capacity){
             this.elements[this.size] = element
             this.size++;
             true
@@ -27,16 +27,61 @@ class Vector(private val capacity: Int) {
         }
     }
 
+    @Throws(FullVectorException::class, IllegalArgumentException::class)
+    fun addOrThrows(element: String, position: Int) {
+        when {
+            position !in 0 until this.capacity -> {
+                throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
+            }
+            this.size == this.capacity -> {
+                throw FullVectorException("Vector is full, don't is possible add more elements.")
+            }
+            this.elements[position] == null -> {
+                this.addOrThrows(element)
+            }
+            else -> {
+                for (currentPosition in this.size-1 downTo position){
+                    this.elements[currentPosition + 1] = this.elements[currentPosition]
+                }
+                this.elements[position] = element
+                this.size++
+            }
+        }
+    }
+
+    fun add(element: String, position: Int): Boolean {
+        return when {
+            position !in 0 until this.capacity -> {
+                false
+            }
+            this.size == this.capacity -> {
+                false
+            }
+            this.elements[position] == null -> {
+                if(this.add(element)) true
+                false
+            }
+            else -> {
+                for (currentPosition in this.size-1 downTo position){
+                    this.elements[currentPosition + 1] = this.elements[currentPosition]
+                }
+                this.elements[position] = element
+                this.size++
+                true
+            }
+        }
+    }
+
     @Throws(IllegalArgumentException::class)
     fun findOrThrows(position: Int): String? {
-        if ((position !in 0 until size)){
+        if ((position !in 0 until this.size)){
             throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
         }
         return this.elements[position]
     }
 
     fun findPosition(element: String): Int {
-        for(i in 0 until size){
+        for(i in 0 until this.size){
             if(this.elements[i].equals(element)){
                 return i
             }
@@ -45,7 +90,7 @@ class Vector(private val capacity: Int) {
     }
 
     fun has(element: String): Boolean {
-        for (i in 0 until size){
+        for (i in 0 until this.size){
             if(this.elements[i].equals(element)){
                 return true
             }
