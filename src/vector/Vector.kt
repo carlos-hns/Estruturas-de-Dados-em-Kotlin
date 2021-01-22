@@ -35,6 +35,24 @@ class Vector(private val capacity: Int) {
         return this.elements[position]
     }
 
+    fun findPosition(element: String): Int {
+        for(i in 0 until size){
+            if(this.elements[i].equals(element)){
+                return i
+            }
+        }
+        return -1
+    }
+
+    fun has(element: String): Boolean {
+        for (i in 0 until size){
+            if(this.elements[i].equals(element)){
+                return true
+            }
+        }
+        return false
+    }
+
     fun size(): Int {
         return this.size
     }
