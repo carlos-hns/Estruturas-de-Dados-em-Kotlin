@@ -27,6 +27,14 @@ class Vector(private val capacity: Int) {
         }
     }
 
+    @Throws(IllegalArgumentException::class)
+    fun findOrThrows(position: Int): String? {
+        if ((position !in 0 until size)){
+            throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
+        }
+        return this.elements[position]
+    }
+
     fun size(): Int {
         return this.size
     }
