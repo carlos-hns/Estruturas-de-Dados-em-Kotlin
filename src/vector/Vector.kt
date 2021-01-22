@@ -27,4 +27,31 @@ class Vector(private val capacity: Int) {
         }
     }
 
+    fun size(): Int {
+        return this.size
+    }
+
+    override fun toString(): String {
+        val mString = StringBuilder()
+        mString.append("[")
+
+        for (i in 0 until this.size - 1){
+            mString.append(this.elements[i])
+            mString.append(", ")
+        }
+
+        // If size is 1, it go 0 to 1 (exclude 1).
+        // For make more beautiful the string we don't iterate
+        // in the last element in the loop above
+        // rather them we add on the if instruction below.
+        // This make the char ',' don't be add after the last element.
+
+        if (this.size > 0){
+            mString.append(this.elements[this.size-1])
+        }
+
+        mString.append("]")
+        return mString.toString()
+    }
+
 }
