@@ -2,13 +2,15 @@ package vector
 
 import kotlin.jvm.Throws
 
-class Vector(private val capacity: Int) {
+class Vector(private var capacity: Int) {
 
     private var size: Int = 0
-    private val elements: Array<String?> = Array(capacity) { null }
+    private var elements: Array<String?> = Array(capacity) { null }
 
     @Throws(FullVectorException::class)
     fun addOrThrows(element: String) {
+
+        increaseSize()
         if (this.size < this.capacity){
             this.elements[this.size] = element
             this.size++;
@@ -18,6 +20,7 @@ class Vector(private val capacity: Int) {
     }
 
     fun add(element: String): Boolean {
+        increaseSize()
         return if (this.size < this.capacity){
             this.elements[this.size] = element
             this.size++;
@@ -29,6 +32,7 @@ class Vector(private val capacity: Int) {
 
     @Throws(FullVectorException::class, IllegalArgumentException::class)
     fun addOrThrows(element: String, position: Int) {
+        increaseSize()
         when {
             position !in 0 until this.capacity -> {
                 throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
@@ -50,6 +54,7 @@ class Vector(private val capacity: Int) {
     }
 
     fun add(element: String, position: Int): Boolean {
+        increaseSize()
         return when {
             position !in 0 until this.capacity -> {
                 false
@@ -69,6 +74,21 @@ class Vector(private val capacity: Int) {
                 this.size++
                 true
             }
+        }
+    }
+
+    private fun updateCapacity(){
+        this.capacity = this.elements.size
+    }
+
+    private fun increaseSize(){
+        updateCapacity()
+        if(this.size == this.capacity){
+            val newElements: Array<String?> = Array(this.capacity * 2) { null }
+            for (i in 0..size){
+                newElements[i] = this.elements[i]
+            }
+            this.elements = newElements
         }
     }
 
