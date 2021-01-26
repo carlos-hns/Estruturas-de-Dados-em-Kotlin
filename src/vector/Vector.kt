@@ -77,6 +77,16 @@ class Vector(private var capacity: Int) {
         }
     }
 
+    fun remove(position: Int){
+        if ((position !in 0 until this.size)){
+            throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
+        }
+        for(currentPosition in position until this.size){
+            this.elements[currentPosition] = this.elements[currentPosition  + 1]
+        }
+        this.size--
+    }
+
     private fun updateCapacity(){
         this.capacity = this.elements.size
     }
