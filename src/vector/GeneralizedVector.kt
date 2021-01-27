@@ -2,13 +2,13 @@ package vector
 
 import kotlin.jvm.Throws
 
-class Vector(private var capacity: Int) {
+class GeneralizedVector(private var capacity: Int) {
 
     private var size: Int = 0
-    private var elements: Array<String?> = Array(capacity) { null }
+    private var elements: Array<Any?> = Array(capacity) { null }
 
     @Throws(FullVectorException::class)
-    fun addOrThrows(element: String) {
+    fun addOrThrows(element: Any) {
 
         increaseSize()
         if (this.size < this.capacity){
@@ -19,7 +19,7 @@ class Vector(private var capacity: Int) {
         }
     }
 
-    fun add(element: String): Boolean {
+    fun add(element: Any): Boolean {
         increaseSize()
         return if (this.size < this.capacity){
             this.elements[this.size] = element
@@ -31,7 +31,7 @@ class Vector(private var capacity: Int) {
     }
 
     @Throws(FullVectorException::class, IllegalArgumentException::class)
-    fun addOrThrows(element: String, position: Int) {
+    fun addOrThrows(element: Any, position: Int) {
         increaseSize()
         when {
             position !in 0 until this.capacity -> {
@@ -53,7 +53,7 @@ class Vector(private var capacity: Int) {
         }
     }
 
-    fun add(element: String, position: Int): Boolean {
+    fun add(element: Any, position: Int): Boolean {
         increaseSize()
         return when {
             position !in 0 until this.capacity -> {
@@ -93,7 +93,7 @@ class Vector(private var capacity: Int) {
 
     private fun increaseSize(){
         if(this.size == this.capacity){
-            val newElements: Array<String?> = Array(this.capacity * 2) { null }
+            val newElements: Array<Any?> = Array(this.capacity * 2) { null }
             for (i in 0 until size){
                 newElements[i] = this.elements[i]
             }
@@ -103,25 +103,25 @@ class Vector(private var capacity: Int) {
     }
 
     @Throws(IllegalArgumentException::class)
-    fun findOrThrows(position: Int): String? {
+    fun findOrThrows(position: Int): Any? {
         if ((position !in 0 until this.size)){
             throw IllegalArgumentException("Invalid position, don't is possible find the element because position is not in correct interval.")
         }
         return this.elements[position]
     }
 
-    fun findPosition(element: String): Int {
+    fun findPosition(element: Any): Int {
         for(i in 0 until this.size){
-            if(this.elements[i].equals(element)){
+            if(this.elements[i]?.equals(element)!!){
                 return i
             }
         }
         return -1
     }
 
-    fun has(element: String): Boolean {
+    fun has(element: Any): Boolean {
         for (i in 0 until this.size){
-            if(this.elements[i].equals(element)){
+            if(this.elements[i]?.equals(element)!!){
                 return true
             }
         }
