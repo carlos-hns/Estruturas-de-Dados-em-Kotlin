@@ -1,8 +1,8 @@
-package vector
+package main.vector
 
 import kotlin.jvm.Throws
 
-class GenericVector(private var capacity: Int) {
+class GeneralizedVector(private var capacity: Int) {
 
     private var size: Int = 0
     private var elements: Array<Any?> = Array(capacity) { null }
