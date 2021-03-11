@@ -13,6 +13,7 @@ In this repository are present data structures that I have implemented and I wil
 - Programming Language: [Kotlin](https://kotlinlang.org/) 
 - Playlist in Youtube: [Loyane](https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBrgumpzz-l8kFMw2DLERdxi)
 - Exercises: [Hacker Rank](https://www.hackerrank.com/)
+- College data structure classes
 
 # 🇧🇷 Minhas Estruturas de Dados em Kotlin
 
@@ -27,6 +28,7 @@ Nesse repositório estão presentes as estruturas de dados que eu implementei e 
 - Linguagem de Programação: [Kotlin](https://kotlinlang.org/) 
 - Playlist no Youtube: [Loyane](https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBrgumpzz-l8kFMw2DLERdxi)
 - Exercícios: [Hacker Rank](https://www.hackerrank.com/)
+- Aulas de estrutura de dados da faculdade
 
 ## 
 Made with love by [Carlos Henrique](https://github.com/carlos-hns) 🐼🖤
